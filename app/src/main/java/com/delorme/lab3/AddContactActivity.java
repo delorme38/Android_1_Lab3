@@ -76,6 +76,7 @@ public class AddContactActivity extends AppCompatActivity {
         if (validate()) {
             appService.getRvAdapter().addContact(contact);
             backToHome();
+
         } else {
             Log.d(TAG, "addContact: erreur validation");
         }
@@ -105,9 +106,10 @@ public class AddContactActivity extends AppCompatActivity {
     }
 
     private void backToHome() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+//        Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
+//        finish();
+        super.onBackPressed();
     }
 
     private Boolean validate() {

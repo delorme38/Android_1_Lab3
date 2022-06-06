@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         if (arrayList != null) {
             rvAdapter.setLocalDataSet(arrayList);
         }
-        Contact batman = Contact.giveMeBatman();
+
         _binding.rvContact.setAdapter(rvAdapter);
         _binding.rvContact.setLayoutManager(new LinearLayoutManager(this));
 
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         //Floating action button
         FloatingActionButton fab = _binding.fab;
         fab.setOnClickListener(view -> {
+            Contact batman = Contact.giveMeBatman();
             rvAdapter.addContact(batman);
             addContactPage();
         });
@@ -93,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void addContactPage(){
         Intent intent = new Intent(this, AddContactActivity.class);
-//        intent.putParcelableArrayListExtra("list", contraventions);
         startActivity(intent);
     }
     public void loadContact(int pos, Contact contact) {
@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("Contact", contact);
         startActivity(intent);
     }
+
 
     @Override
     protected void onDestroy() {
