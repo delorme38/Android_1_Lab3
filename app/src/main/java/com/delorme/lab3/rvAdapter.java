@@ -115,6 +115,10 @@ public class rvAdapter extends RecyclerView.Adapter<rvAdapter.ViewHolder> implem
                     for (Contact contact : localDataSet) {
                         if (contact.getFirstName().toLowerCase().contains(query.toLowerCase())) {
                             filtered.add(contact);
+                        } else if (contact.getLastName().toLowerCase().contains((query.toLowerCase()))) {
+                            filtered.add(contact);
+                        } else if (contact.getPhoneNumber().toLowerCase().contains(query.toLowerCase())) {
+                            filtered.add(contact);
                         }
                     }
                 }
