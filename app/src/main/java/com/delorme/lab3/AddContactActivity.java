@@ -52,7 +52,7 @@ public class AddContactActivity extends AppCompatActivity {
             case R.id.idMenuSave:
                 if (update) {
                     updateContact();
-                }else {
+                } else {
                     addContact();
                 }
                 return true;
@@ -67,7 +67,7 @@ public class AddContactActivity extends AppCompatActivity {
     }
 
     private void addContact() {
-        if (validate()){
+        if (validate()) {
             appService.getRvAdapter().addContact(contact);
         } else {
             Log.d(TAG, "addContact: erreur validation");
@@ -76,7 +76,7 @@ public class AddContactActivity extends AppCompatActivity {
 
     private void updateContact() {
         int pos = getIntent().getIntExtra("POS", -1);
-        if (pos != -1 && update && validate())  {
+        if (pos != -1 && update && validate()) {
             appService.getRvAdapter().updateContact(contact, pos);
             update = false;
             invalidateOptionsMenu();
@@ -89,5 +89,22 @@ public class AddContactActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    private Boolean validate() {
+        Boolean valid = false;
+        String lastName = contact.getLastName();
+        String firstName = contact.getFirstName();
+        String phoneNumber = contact.getPhoneNumber();
+        String email = contact.getEmail();
+
+        if (lastName.equals("") || firstName.equals("") || phoneNumber.equals("") || phoneNumber.equals("")) {
+            //code erreur si les champs sont vide
+            valid = false;
+        } else {
+            valid = true;
+        }
+        return valid;
+    }
+
 
 }

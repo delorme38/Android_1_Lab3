@@ -10,7 +10,7 @@ public class Contact extends BaseObservable implements Parcelable {
     private String lastName = "";
     private String phoneNumber = "";
     private String email = "";
-    private boolean male = false;
+    private boolean male = true;
     private boolean female = false;
 
     public Contact() {};
