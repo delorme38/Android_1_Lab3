@@ -75,6 +75,7 @@ public class AddContactActivity extends AppCompatActivity {
     private void addContact() {
         if (validate()) {
             appService.getRvAdapter().addContact(contact);
+            backToHome();
         } else {
             Log.d(TAG, "addContact: erreur validation");
         }
@@ -110,13 +111,13 @@ public class AddContactActivity extends AppCompatActivity {
     }
 
     private Boolean validate() {
-        Boolean valid = false;
+        Boolean valid;
         String lastName = contact.getLastName();
         String firstName = contact.getFirstName();
         String phoneNumber = contact.getPhoneNumber();
         String email = contact.getEmail();
 
-        if (lastName.equals("") || firstName.equals("") || phoneNumber.equals("") || phoneNumber.equals("")) {
+        if (lastName.equals("") || firstName.equals("") || phoneNumber.equals("") || phoneNumber.equals("") || email.equals("")) {
             //code erreur si les champs sont vide
             valid = false;
         } else {
