@@ -65,6 +65,12 @@ public class AddContactActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    public void deleteEntries() {
+        contact = new Contact();
+        _binding.setContact(contact);
+        update = false;
+        invalidateOptionsMenu();
+    }
 
     private void addContact() {
         if (validate()) {
@@ -81,6 +87,19 @@ public class AddContactActivity extends AppCompatActivity {
             update = false;
             invalidateOptionsMenu();
             backToHome();
+        }
+    }
+
+    private void deleteStudent() {
+        if (update) {
+            int pos = getIntent().getIntExtra("POS", -1);
+            if (pos != -1) {
+                appService.getRvAdapter().deleteContact(pos);
+                contact = new Contact();
+                _binding.setContact(contact);
+                invalidateOptionsMenu();
+                backToHome();
+            }
         }
     }
 
