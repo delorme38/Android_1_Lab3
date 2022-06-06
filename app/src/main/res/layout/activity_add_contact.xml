@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="contact"
+            type="com.delorme.lab3.Contact" />
+    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/idTextFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Firstname" />
+
+    <EditText
+        android:id="@+id/idInputFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:text="@={contact.firstName}"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/idTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/idInputName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:text="@={contact.lastName}"
+        android:inputType="textPersonName" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/idTextSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sex" />
+
+        <RadioGroup
+            android:id="@+id/idRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/idMaleRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@={contact.male}"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/idFemaleRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@={contact.female}"
+                android:text="Femelle" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/idTextPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Phone Number" />
+
+    <EditText
+        android:id="@+id/idInputPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@={contact.phoneNumber}"
+        android:ems="10"
+        android:inputType="phone" />
+
+    <TextView
+        android:id="@+id/idTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Email" />
+
+    <EditText
+        android:id="@+id/idInputEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:text="@={contact.email}"
+        android:inputType="textEmailAddress" />
+
+</LinearLayout>
+</layout>
