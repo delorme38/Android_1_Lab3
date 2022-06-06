@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
+        <import type="androidx.core.content.ContextCompat" />
         <variable
             name="contact"
             type="com.delorme.lab3.Contact" />
+        <variable
+            name="color"
+            type="com.delorme.lab3.FieldsColor" />
     </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -15,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="@{ContextCompat.getColor(context, color.firstName)}"
         android:text="Firstname" />
 
     <EditText
@@ -31,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="@{ContextCompat.getColor(context, color.lastName)}"
         android:text="Name" />
 
     <EditText
@@ -82,6 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="@{ContextCompat.getColor(context, color.phone)}"
         android:text="Phone Number" />
 
     <EditText
@@ -98,6 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="@{ContextCompat.getColor(context, color.email)}"
         android:text="Email" />
 
     <EditText

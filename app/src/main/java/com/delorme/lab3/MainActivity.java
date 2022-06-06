@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 
 import com.delorme.lab3.databinding.ActivityMainBinding;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         appService = AppService.getInstance();
+
 
         //Shared Data
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
