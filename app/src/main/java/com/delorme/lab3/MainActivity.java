@@ -1,5 +1,7 @@
 package com.delorme.lab3;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
@@ -8,11 +10,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 
 import com.delorme.lab3.databinding.ActivityMainBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding _binding;
@@ -24,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         appService = AppService.getInstance();
 
+        //Shared Data
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Gson gson = new Gson();
+        String json = sharedPrefs.getString(TAG, "");
+        Type type = new TypeToken<List<Contact>>() {}.getType();
+        List<Contact> arrayList = gson.fromJson(json, type);
 
         if (savedInstanceState != null) {
         }
@@ -37,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         rvAdapter = appService.getRvAdapter();
+        if (arrayList != null) {
+            rvAdapter.setLocalDataSet(arrayList);
+        }
         Contact batman = Contact.giveMeBatman();
         _binding.rvContact.setAdapter(rvAdapter);
         _binding.rvContact.setLayoutManager(new LinearLayoutManager(this));
@@ -83,5 +101,17 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("POS", pos);
         intent.putExtra("Contact", contact);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        Gson gson = new Gson();
+        List<Contact> arrayList = rvAdapter.getLocalDataSet();
+        String json = gson.toJson(arrayList);
+        editor.putString(TAG, json);
+        editor.commit();
     }
 }
