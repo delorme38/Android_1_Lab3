@@ -11,17 +11,20 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class rvAdapter extends RecyclerView.Adapter<rvAdapter.ViewHolder> implements Filterable {
 
     private List<Contact> localDataSet;
+    private List<Contact> filteredLocalDataSet;
     private MainActivity mainActivity;
 
 
     public rvAdapter(Context context) {
         this.mainActivity = (MainActivity) context;
         this.localDataSet = AppService.getInstance().getContacts();
+        this.filteredLocalDataSet = AppService.getInstance().getContacts();
     }
 
     public List<Contact> getLocalDataSet() {
@@ -30,6 +33,7 @@ public class rvAdapter extends RecyclerView.Adapter<rvAdapter.ViewHolder> implem
 
     public rvAdapter setLocalDataSet(List<Contact> localDataSet) {
         this.localDataSet = localDataSet;
+        this.filteredLocalDataSet = localDataSet;
         notifyDataSetChanged();
         return this;
     }
@@ -53,11 +57,6 @@ public class rvAdapter extends RecyclerView.Adapter<rvAdapter.ViewHolder> implem
     public void addContact(Contact student){
         localDataSet.add(0, student);
         notifyItemInserted(0);
-    }
-
-    @Override
-    public Filter getFilter() {
-        return null;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -98,6 +97,39 @@ public class rvAdapter extends RecyclerView.Adapter<rvAdapter.ViewHolder> implem
 
     @Override
     public int getItemCount() {
-        return localDataSet.size();
+        return filteredLocalDataSet.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String query = charSequence.toString();
+
+                List<Contact> filtered = new ArrayList<>();
+
+                if (query.isEmpty()) {
+                    filtered = localDataSet;
+                } else {
+                    for (Contact contact : localDataSet) {
+                        if (contact.getFirstName().toLowerCase().contains(query.toLowerCase())) {
+                            filtered.add(contact);
+                        }
+                    }
+                }
+
+                FilterResults results = new FilterResults();
+                results.count = filtered.size();
+                results.values = filtered;
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults results) {
+                filteredLocalDataSet = (ArrayList<Contact>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }
