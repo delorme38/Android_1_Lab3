@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@{ContextCompat.getColor(context, color.firstName)}"
-        android:text="Firstname" />
+        android:text="@string/firstname" />
 
     <EditText
         android:id="@+id/idInputFirstName"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@{ContextCompat.getColor(context, color.lastName)}"
-        android:text="Name" />
+        android:text="@string/name" />
 
     <EditText
         android:id="@+id/idInputName"
@@ -58,7 +58,7 @@
             android:id="@+id/idTextSex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sex" />
+            android:text="@string/sex" />
 
         <RadioGroup
             android:id="@+id/idRadioGroup"
@@ -72,14 +72,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="@={contact.male}"
-                android:text="Male" />
+                android:text="@string/male" />
 
             <RadioButton
                 android:id="@+id/idFemaleRadio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="@={contact.female}"
-                android:text="Femelle" />
+                android:text="@string/femelle" />
         </RadioGroup>
     </LinearLayout>
 
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@{ContextCompat.getColor(context, color.phone)}"
-        android:text="Phone Number" />
+        android:text="@string/phone_number" />
 
     <EditText
         android:id="@+id/idInputPhoneNumber"
@@ -106,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@{ContextCompat.getColor(context, color.email)}"
-        android:text="Email" />
+        android:text="@string/email" />
 
     <EditText
         android:id="@+id/idInputEmail"

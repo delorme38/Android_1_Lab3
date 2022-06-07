@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Lab3</string>
     <string name="add">add</string>
-    <string name="header_text">Sleep Results</string>
     <string name="menu_save">SAVE</string>
+    <string name="firstname">Firstname</string>
+    <string name="name">Name</string>
+    <string name="sex">Sex</string>
+    <string name="male">Male</string>
+    <string name="femelle">Femelle</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
 </resources>

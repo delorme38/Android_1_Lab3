@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lab3</string>
+    <string name="add">Ajouter</string>
+    <string name="menu_save">Sauvegarde</string>
+    <string name="firstname">Prenom</string>
+    <string name="name">Nom</string>
+    <string name="sex">Sex</string>
+    <string name="male">Homme</string>
+    <string name="femelle">Femme</string>
+    <string name="phone_number">Numero de telephone</string>
+    <string name="email">Email</string>
+</resources>
