@@ -3,13 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Cedric/Desktop/AEC-DevAppMobile/android1/labo/labo3/app/src/main/res/layout/activity_add_contact.xml" value="0.18115942028985507" />
+        <entry key="..\:/Users/Cedric/Desktop/AEC-DevAppMobile/android1/labo/labo3/app/src/main/res/layout/activity_main.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/delor/AndroidStudioProjects/Lab3/app/src/main/res/layout/activity_add_contact.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/delor/AndroidStudioProjects/Lab3/app/src/main/res/layout/activity_main.xml" value="0.228125" />
         <entry key="..\:/Users/delor/AndroidStudioProjects/Lab3/app/src/main/res/layout/recycler_template.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/delor/AndroidStudioProjects/Lab3/app/src/main/res/layout/recyvler_header.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/delor/AndroidStudioProjects/Lab3/app/src/main/res/layout/rv_header.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/delor/AndroidStudioProjects/Lab3/app/src/main/res/menu/add_contact_menu.xml" value="0.1" />
-        <entry key="..\:/Users/delor/AndroidStudioProjects/Lab3/app/src/main/res/menu/main_activity_menu.xml" value="0.1" />
       </map>
     </option>
   </component>
