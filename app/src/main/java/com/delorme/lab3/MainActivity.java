@@ -21,7 +21,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,21 +40,28 @@ public class MainActivity extends AppCompatActivity {
     private AppService appService;
     private rvAdapter rvAdapter;
 
+    private String SAVEFILENAME = "contacts.json";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         appService = AppService.getInstance();
 
 
-        //Shared Data
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        Gson gson = new Gson();
-        String json = sharedPrefs.getString(TAG, "");
-        Type type = new TypeToken<List<Contact>>() {}.getType();
-        List<Contact> arrayList = gson.fromJson(json, type);
-
-        if (savedInstanceState != null) {
+        //sava data
+        String json = null;
+        List<Contact> arrayList = new ArrayList<>();
+        try{
+            json = readFile();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+        if( json != null){
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<Contact>>() {}.getType();
+            arrayList = gson.fromJson(json, type);
+        }
+
 
         //Binding
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -65,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         //Floating action button
         FloatingActionButton fab = _binding.fab;
         fab.setOnClickListener(view -> {
-            Contact batman = Contact.giveMeBatman();
-            rvAdapter.addContact(batman);
             addContactPage();
         });
     }
@@ -109,12 +125,33 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPrefs.edit();
+
         Gson gson = new Gson();
         List<Contact> arrayList = rvAdapter.getLocalDataSet();
         String json = gson.toJson(arrayList);
-        editor.putString(TAG, json);
-        editor.commit();
+        try (FileOutputStream fos = this.openFileOutput(SAVEFILENAME, Context.MODE_PRIVATE)) {
+            fos.write(json.getBytes(StandardCharsets.UTF_8));
+        }catch(IOException e){
+            Log.e(TAG, e.toString() );
+        }
+    }
+
+    public String readFile() throws FileNotFoundException {
+        FileInputStream fis = this.openFileInput(SAVEFILENAME);
+        InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);
+        StringBuilder stringBuilder = new StringBuilder();
+        String contents;
+        try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
+            String line = reader.readLine();
+            while (line != null) {
+                stringBuilder.append(line).append('\n');
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            // Error occurred when opening raw file for reading.
+        } finally {
+            contents = stringBuilder.toString();
+        }
+        return contents;
     }
 }
